@@ -106,9 +106,11 @@ public class Board {
 		int number = 1;
 		for(int i = 0; i < 4; i++){
 			for(int j = 0; j < 4; j++){
-				if(state[i][j] == number) solved=true;
-				else if(state[3][3] == 0) solved = true;
-				else solved=false;
+				if(number==16)number=0;
+				if(state[i][j] == number){
+					solved=true;
+				}
+				else return false;
 				number++;
 			}
 		}

@@ -25,19 +25,37 @@ public class Board {
 		return state;
 	}
 	
+	public void setState(int[][] state) {
+		this.state = state;
+	}
+
+	public void setZero(Point zero) {
+		this.zero = zero;
+	}
+
 	public Board(){
 		super();
 	}
 	
-	public Board(Board toCopy){
-		this.state = toCopy.state;
-		this.zero = toCopy.zero;
-		//this.lastMove = toCopy.lastMove;
-	}
+//	public Board(Board toCopy){
+//		this.state = new toCopy.state;
+//		if(toCopy==copy) System.out.println("ta sama referencja");
+//		this.zero = toCopy.zero;
+//		//this.lastMove = toCopy.lastMove;
+//	}
 	
 	public Board copy(Board toCopy){
-		Board copy = new Board(toCopy);
-		if(toCopy==copy) System.out.println("ta sama referencja");
+
+		int[][] stateCopy = new int[4][4];
+		Point zeroCopy = new Point(toCopy.getZero().getX(), toCopy.getZero().getY());
+		for(int j = 0; j < 4; j++){
+			for(int k = 0; k < 4; k++){
+				stateCopy[j][k]=toCopy.getState()[j][k];
+			}
+		}
+		Board copy = new Board();
+		copy.setState(stateCopy);
+		copy.setZero(zeroCopy);
 		return copy;
 	}
 	

@@ -5,7 +5,7 @@ import java.util.LinkedList;
  * Klasa Node<T> - węzeł drzewa
  * @author kodatnik.blogspot.com
  */
-class Node<T> {
+public class Node<T> {
  private T data;
  private Node<T> parent;
  private LinkedList<Node<T>> children;

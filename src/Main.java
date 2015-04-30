@@ -1,5 +1,5 @@
 import Exception.ImpossibleToMoveException;
-
+import Tree.*;
 
 public final class Main {
 
@@ -43,6 +43,10 @@ public final class Main {
 			down.print();
 		} catch (ImpossibleToMoveException e) {}
 		
+		
+		
+		//DRZEWO
+		Node<SingleMove> root = new Node<SingleMove>(null, rootMove);
 	}
 
 }

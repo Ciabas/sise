@@ -7,16 +7,6 @@ public class Board {
 	public final static int SIZE = 4;
 	private int[][] state = new int[SIZE][SIZE];
 	private Point zero = new Point();
-//	private Point lastMove;
-//	
-//
-//	public Point getLastMove() {
-//		return lastMove;
-//	}
-//	
-//	public void setLastMove(Point lastMove) {
-//		this.lastMove = lastMove;
-//	}
 	
 	public Point getZero() {
 		return zero;
@@ -37,13 +27,6 @@ public class Board {
 	public Board(){
 		super();
 	}
-	
-//	public Board(Board toCopy){
-//		this.state = new toCopy.state;
-//		if(toCopy==copy) System.out.println("ta sama referencja");
-//		this.zero = toCopy.zero;
-//		//this.lastMove = toCopy.lastMove;
-//	}
 	
 	public Board copy(Board toCopy){
 		

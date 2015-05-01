@@ -1,3 +1,4 @@
+import Exception.FoundResolutionException;
 import Exception.ImpossibleToMoveException;
 import Tree.*;
 
@@ -7,7 +8,9 @@ public final class Main {
 		
 		Board rootBoard = new Board();
 		rootBoard.create();
-		rootBoard.shuffle();
+		//rootBoard.shuffle();
+		rootBoard.smartShuffle(35);
+		
 		SingleMove rootMove = new SingleMove(rootBoard, "root");
 //		rootBoard.create();
 //		rootBoard.print();
@@ -46,18 +49,18 @@ public final class Main {
 		
 		
 		//DRZEWO
+		Node<SingleMove> root = new Node<SingleMove>(null, rootMove);
+		try{
+			Recursion.recursionAdd(root, 20);
+		}catch(FoundResolutionException e){
+			System.out.println("znalazł :)");
+		}
+		System.out.println();
+		System.out.println("Początkowa układanka:");
 		rootMove.getBoard().print();
 		System.out.println();
 		System.out.println();
-		Node<SingleMove> root = new Node<SingleMove>(null, rootMove);
-		try{
-			if(Recursion.recursionAdd(root, 38) == 1) return;	
-		}catch(Exception e){
-			System.out.println("Pewnie brakło pamięci...");
-		}
-		System.out.println();
-		System.out.println();
-		System.out.println("rozwiazane?: "+rootMove.getBoard().checkIfSolved());
+//		System.out.println("rozwiazane?: "+rootMove.getBoard().checkIfSolved());
 	}
 
 }

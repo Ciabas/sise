@@ -92,6 +92,41 @@ public class Board {
 		localizateZero();
 	}
 	
+	public void smartShuffle(int steps){
+		char[] move = {'P','L','G','D'};
+		Random random_side;
+		for(int i = 0 ; i < steps ; i++){
+			random_side = new Random();
+			char direction = move[random_side.nextInt(3)];
+			switch(direction){
+			case('P'):
+				try {
+					shuffleZeroToRight();
+					break;
+				} catch (ImpossibleToMoveException e) {
+				}
+			case('L'):
+				try {
+					shuffleZeroToLeft();
+					break;
+				} catch (ImpossibleToMoveException e) {
+				}
+			case('G'):
+				try {
+					shuffleZeroToUp();
+					break;
+				} catch (ImpossibleToMoveException e) {
+				}
+			case('D'):
+				try {
+					shuffleZeroToDown();
+					break;
+				} catch (ImpossibleToMoveException e) {
+				}
+			}
+		}
+	}
+	
 	public void localizateZero(){
 		for(int j = 0; j < SIZE; j++){
 			for(int k = 0; k < SIZE; k++){
@@ -137,6 +172,22 @@ public class Board {
 		return newBoard;
 	}
 	
+	private void shuffleZeroToLeft() throws ImpossibleToMoveException{
+		int xZero = getZero().getX();
+		int yZero = getZero().getY();
+		
+		int changingX= 999;
+		if(xZero>0){ 
+			changingX = xZero-1;
+		}
+		else throw new ImpossibleToMoveException();
+		int changingY = yZero;
+		
+		int tmp = state[yZero][xZero];
+		state[yZero][xZero]=state[changingY][changingX];
+		state[changingY][changingX]=tmp;
+		localizateZero();
+	}
 	public Board zeroToRight() throws ImpossibleToMoveException{
 		int xZero = getZero().getX();
 		int yZero = getZero().getY();
@@ -154,6 +205,23 @@ public class Board {
 		newBoard.state[changingY][changingX]=tmp;
 		newBoard.localizateZero();
 		return newBoard;
+	}
+	
+	private void shuffleZeroToRight() throws ImpossibleToMoveException{
+		int xZero = getZero().getX();
+		int yZero = getZero().getY();
+		
+		int changingX= 999;
+		if(xZero<SIZE - 1){ 
+			changingX = xZero+1;
+		}
+		else throw new ImpossibleToMoveException();
+		int changingY = yZero;
+		
+		int tmp = state[yZero][xZero];
+		state[yZero][xZero]=state[changingY][changingX];
+		state[changingY][changingX]=tmp;
+		localizateZero();
 	}
 	
 	public Board zeroToDown() throws ImpossibleToMoveException{
@@ -175,6 +243,23 @@ public class Board {
 		return newBoard;
 	}
 	
+	private void shuffleZeroToDown() throws ImpossibleToMoveException{
+		int xZero = getZero().getX();
+		int yZero = getZero().getY();
+		
+		int changingY= 999;
+		if(yZero<SIZE - 1){ 
+			changingY = yZero+1;
+		}
+		else throw new ImpossibleToMoveException();
+		int changingX = xZero;
+
+		int tmp = state[yZero][xZero];
+		state[yZero][xZero]=state[changingY][changingX];
+		state[changingY][changingX]=tmp;
+		localizateZero();
+	}
+	
 	public Board zeroToUp() throws ImpossibleToMoveException{
 		int xZero = getZero().getX();
 		int yZero = getZero().getY();
@@ -192,6 +277,23 @@ public class Board {
 		newBoard.state[changingY][changingX]=tmp;
 		newBoard.localizateZero();
 		return newBoard;
+	}
+	
+	private void shuffleZeroToUp() throws ImpossibleToMoveException{
+		int xZero = getZero().getX();
+		int yZero = getZero().getY();
+		
+		int changingY= 999;
+		if(yZero>0){ 
+			changingY = yZero-1;
+		}
+		else throw new ImpossibleToMoveException();
+		int changingX = xZero;
+		
+		int tmp = state[yZero][xZero];
+		state[yZero][xZero]=state[changingY][changingX];
+		state[changingY][changingX]=tmp;
+		localizateZero();
 	}
 	
 	public void print(){

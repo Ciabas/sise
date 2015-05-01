@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 import Exception.FoundResolutionException;
@@ -7,13 +9,19 @@ import Tree.Node;
 
 
 public class Recursion {
+	
+	private static Queue<Node<SingleMove>> queueBFS = new LinkedList<Node<SingleMove>>();
+	private static int amount = 0;
+	
 	public static void recursionAddDFS(Node<SingleMove> node, int counter, String [] order) throws FoundResolutionException{
+			amount++;
 			if(node.getData().getBoard().checkIfSolved()==true){
 				System.out.println("DFS, wyszlooooooooooooooooooooooooooooooo");
 				System.out.println("Rozwiazanie: " + new StringBuilder(pathToSolutionReversed(node)).reverse());
 				//System.out.println("Głębokość: " + (20 - counter));
-				//WYSYP ILOSC KROKOW
+				System.out.println("Liczba kroków: " + amount);
 				node.getData().getBoard().print();
+				amount = 0;
 				throw new FoundResolutionException();
 			}
 		try{
@@ -23,8 +31,7 @@ public class Recursion {
 			}
 			if(counter>0){
 				for(int i = 0; i < orderCopy.length; i++){
-					System.out.println("szukam . . . głębokość: " + (20 - counter));
-					
+					//System.out.println("szukam . . . głębokość: " + (20 - counter));
 					try{
 						if(node.getData().getMove() != opposite(orderCopy[i])){
 							SingleMove move = moveTo(orderCopy[i], node);
@@ -45,12 +52,14 @@ public class Recursion {
 	}
 	
 	public static void recursionAddBFS(Node<SingleMove> node, int counter, String [] order) throws FoundResolutionException{
+		amount++;
 		if(node.getData().getBoard().checkIfSolved()==true){
 			System.out.println("BFS, wyszlooooooooooooooooooooooooooooooo");
 			System.out.println("Rozwiazanie: " + new StringBuilder(pathToSolutionReversed(node)).reverse());
 			//System.out.println("Głębokość: " + (20 - counter));
-			//WYSYP ILOSC KROKOW
+			System.out.println("Liczba kroków: " + amount);
 			node.getData().getBoard().print();
+			amount = 0;
 			throw new FoundResolutionException();
 		}
 		try{
@@ -59,13 +68,26 @@ public class Recursion {
 				orderCopy = randomOrder();
 			}
 			if(counter>0){
-				for(int i = 0; i < orderCopy.length; i++){
+				for(int i = 0; i < orderCopy.length; i++){	// stworz wszytkie mozliwe dzieci
+					//System.out.println("szukam . . . głębokość: " + (20 - counter));
 					try{
-						/////////////////TUTAJ ALGORYTM TWORZENIA W GLAB
-						//zrob dzieci dla mnie i calego mojego pietra, potem wywolaj to samo dla mojego dziecka[0]
+						if(node.getData().getMove() != opposite(orderCopy[i])){
+							SingleMove move = moveTo(orderCopy[i], node);
+							Node<SingleMove> moveNode = new Node<SingleMove>();
+							moveNode.setData(move);
+							node.addChild(moveNode);
+						}
 					}
 					catch (ImpossibleToMoveException e) {}
 				}
+				queueBFS.remove(node);						//usuwasz sie bo sprawdziles juz
+				for(int j = 0; j< node.getDegree(); j++){ 	//dla kazdego dziecka
+					queueBFS.add(node.getChild(j));			//dodaj dziecko do kolejki
+					counter++;								//zwiekszamy counter o liczbe dzieci, zeby counter odpowiadal za poziom
+				}
+				for(int j = 0; j< node.getDegree(); j++){
+					recursionAddBFS(queueBFS.poll(), --counter, orderCopy);
+				}	
 			}
 		}
 		catch(OutOfMemoryError E){

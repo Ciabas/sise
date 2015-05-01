@@ -4,7 +4,7 @@ import Exception.ImpossibleToMoveException;
 
 
 public class Board {
-	public final static int SIZE = 3;
+	public final static int SIZE = 4;
 	private int[][] state = new int[SIZE][SIZE];
 	private Point zero = new Point();
 //	private Point lastMove;

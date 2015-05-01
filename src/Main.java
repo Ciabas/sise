@@ -9,7 +9,7 @@ public final class Main {
 		Board rootBoard = new Board();
 		rootBoard.create();
 		//rootBoard.shuffle();
-		rootBoard.smartShuffle(35);
+		rootBoard.smartShuffle(10);
 		
 		SingleMove rootMove = new SingleMove(rootBoard, "root");
 //		rootBoard.create();
@@ -51,7 +51,7 @@ public final class Main {
 		//DRZEWO
 		Node<SingleMove> root = new Node<SingleMove>(null, rootMove);
 		try{
-			Recursion.recursionAdd(root, 20);
+			Recursion.recursionAdd(root, 30);
 		}catch(FoundResolutionException e){
 			System.out.println("znalazł :)");
 		}

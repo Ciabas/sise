@@ -2,20 +2,17 @@ import Exception.ImpossibleToMoveException;
 import Tree.Node;
 
 
+
 public class Recursion {
-		public static void recursionAdd(Node<SingleMove> parrent, int counter){
+		public static int recursionAdd(Node<SingleMove> parrent, int counter){
 			if(parrent.getData().getBoard().checkIfSolved()==true){
 				System.out.println("WYSZLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
 				System.out.println("WYSZLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-				System.out.println("WYSZLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-				System.out.println("WYSZLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-				System.out.println("WYSZLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-				System.out.println("WYSZLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-				System.out.println("WYSZLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-				System.out.println("WYSZLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+				System.out.println("Głębokość: " + (40 - counter));
 				parrent.getData().getBoard().print();
-				return;
+				return 1;
 			}
+
 			if(counter>0){
 				try {
 					if(parrent.getData().getMove()!="P"){
@@ -60,7 +57,7 @@ public class Recursion {
 						recursionAdd(downNode, --counter);
 					}
 				} catch (ImpossibleToMoveException e) {}
-				return;
 			}
+			return 0;
 		}
 }

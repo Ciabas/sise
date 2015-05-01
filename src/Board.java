@@ -4,7 +4,8 @@ import Exception.ImpossibleToMoveException;
 
 
 public class Board {
-	private int[][] state = new int[4][4];
+	public final static int SIZE = 3;
+	private int[][] state = new int[SIZE][SIZE];
 	private Point zero = new Point();
 //	private Point lastMove;
 //	
@@ -45,11 +46,11 @@ public class Board {
 //	}
 	
 	public Board copy(Board toCopy){
-
-		int[][] stateCopy = new int[4][4];
+		
+		int[][] stateCopy = new int[SIZE][SIZE];
 		Point zeroCopy = new Point(toCopy.getZero().getX(), toCopy.getZero().getY());
-		for(int j = 0; j < 4; j++){
-			for(int k = 0; k < 4; k++){
+		for(int j = 0; j < SIZE; j++){
+			for(int k = 0; k < SIZE; k++){
 				stateCopy[j][k]=toCopy.getState()[j][k];
 			}
 		}
@@ -61,10 +62,10 @@ public class Board {
 	
 	public void create(){
 		int number = 1;
-		for(int j = 0; j < 4; j++){
-			for(int k = 0; k < 4; k++){
+		for(int j = 0; j < SIZE; j++){
+			for(int k = 0; k < SIZE; k++){
 				state[j][k] = number;
-				if(number==16) state[j][k] = 0;
+				if(number==SIZE*SIZE) state[j][k] = 0;
 				number++;
 			}
 		}
@@ -76,13 +77,13 @@ public class Board {
 		Random rand;
 		for(int i = 0; i < 30; i++){
 			rand = new Random();
-			randomX = rand.nextInt(4);
+			randomX = rand.nextInt(SIZE);
 			rand = new Random();
-			randomY = rand.nextInt(4);
+			randomY = rand.nextInt(SIZE);
 			rand = new Random();
-			randomX1 = rand.nextInt(4);
+			randomX1 = rand.nextInt(SIZE);
 			rand = new Random();
-			randomY1 = rand.nextInt(4);
+			randomY1 = rand.nextInt(SIZE);
 			
 			tmp=state[randomX][randomY];
 			state[randomX][randomY]=state[randomX1][randomY1];
@@ -92,8 +93,8 @@ public class Board {
 	}
 	
 	public void localizateZero(){
-		for(int j = 0; j < 4; j++){
-			for(int k = 0; k < 4; k++){
+		for(int j = 0; j < SIZE; j++){
+			for(int k = 0; k < SIZE; k++){
 				if(state[j][k]==0){
 					this.zero.setLocation(k, j);
 				}
@@ -104,9 +105,9 @@ public class Board {
 	public boolean checkIfSolved(){
 		boolean solved=false;
 		int number = 1;
-		for(int i = 0; i < 4; i++){
-			for(int j = 0; j < 4; j++){
-				if(number==16)number=0;
+		for(int i = 0; i < SIZE; i++){
+			for(int j = 0; j < SIZE; j++){
+				if(number==SIZE*SIZE)number=0;
 				if(state[i][j] == number){
 					solved=true;
 				}
@@ -141,7 +142,7 @@ public class Board {
 		int yZero = getZero().getY();
 		
 		int changingX= 999;
-		if(xZero<3){ 
+		if(xZero<SIZE - 1){ 
 			changingX = xZero+1;
 		}
 		else throw new ImpossibleToMoveException();
@@ -160,7 +161,7 @@ public class Board {
 		int yZero = getZero().getY();
 		
 		int changingY= 999;
-		if(yZero<3){ 
+		if(yZero<SIZE - 1){ 
 			changingY = yZero+1;
 		}
 		else throw new ImpossibleToMoveException();
@@ -195,9 +196,9 @@ public class Board {
 	
 	public void print(){
 		String toPrint="";
-		for(int i = 0; i < 4; i++){
-			for(int j = 0; j < 4; j++){
-				toPrint+=state[i][j]+" ";
+		for(int i = 0; i < SIZE; i++){
+			for(int j = 0; j < SIZE; j++){
+				toPrint+=state[i][j]+"\t";
 			}
 			System.out.println(toPrint);
 			toPrint="";

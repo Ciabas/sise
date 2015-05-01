@@ -46,11 +46,17 @@ public final class Main {
 		
 		
 		//DRZEWO
-		Node<SingleMove> root = new Node<SingleMove>(null, rootMove);
-		Recursion.recursionAdd(root, 20);
-		
-		System.out.println();
 		rootMove.getBoard().print();
+		System.out.println();
+		System.out.println();
+		Node<SingleMove> root = new Node<SingleMove>(null, rootMove);
+		try{
+			if(Recursion.recursionAdd(root, 38) == 1) return;	
+		}catch(Exception e){
+			System.out.println("Pewnie brakło pamięci...");
+		}
+		System.out.println();
+		System.out.println();
 		System.out.println("rozwiazane?: "+rootMove.getBoard().checkIfSolved());
 	}
 

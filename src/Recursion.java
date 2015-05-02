@@ -16,11 +16,14 @@ public class Recursion {
 	public static void recursionAddDFS(Node<SingleMove> node, int counter, String [] order) throws FoundResolutionException{
 			amount++;
 			if(node.getData().getBoard().checkIfSolved()==true){
-				System.out.println("DFS, wyszlooooooooooooooooooooooooooooooo");
-				System.out.println("Rozwiazanie: " + new StringBuilder(pathToSolutionReversed(node)).reverse());
+				System.out.println("DFS");
+				StringBuilder steps = new StringBuilder(pathToSolutionReversed(node)).reverse();
+				System.out.println("Rozwiazanie: " + steps);
 				//System.out.println("Głębokość: " + (20 - counter));
-				System.out.println("Liczba kroków: " + amount);
+				System.out.println("Liczba kroków: " + (steps.length()/2));
+				System.out.println("Amount: " + amount);
 				node.getData().getBoard().print();
+	
 				amount = 0;
 				throw new FoundResolutionException();
 			}
@@ -54,10 +57,12 @@ public class Recursion {
 	public static void recursionAddBFS(Node<SingleMove> node, int counter, String [] order) throws FoundResolutionException{
 		amount++;
 		if(node.getData().getBoard().checkIfSolved()==true){
-			System.out.println("BFS, wyszlooooooooooooooooooooooooooooooo");
-			System.out.println("Rozwiazanie: " + new StringBuilder(pathToSolutionReversed(node)).reverse());
+			System.out.println("BFS");
+			StringBuilder steps = new StringBuilder(pathToSolutionReversed(node)).reverse();
+			System.out.println("Rozwiazanie: " + steps);
 			//System.out.println("Głębokość: " + (20 - counter));
-			System.out.println("Liczba kroków: " + amount);
+			System.out.println("Liczba kroków: " + (steps.length()/2));
+			System.out.println("Amount: " + amount);
 			node.getData().getBoard().print();
 			amount = 0;
 			throw new FoundResolutionException();

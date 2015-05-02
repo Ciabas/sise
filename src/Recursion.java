@@ -13,20 +13,19 @@ public class Recursion {
 	private static Queue<Node<SingleMove>> queueBFS = new LinkedList<Node<SingleMove>>();
 	private static int amount = 0;
 	
-	public static void recursionAddDFS(Node<SingleMove> node, int counter, String [] order) throws FoundResolutionException{
-			amount++;
-			if(node.getData().getBoard().checkIfSolved()==true){
-				System.out.println("DFS");
-				StringBuilder steps = new StringBuilder(pathToSolutionReversed(node)).reverse();
-				System.out.println("Rozwiazanie: " + steps);
-				//System.out.println("Głębokość: " + (20 - counter));
-				System.out.println("Liczba kroków: " + (steps.length()/2));
-				System.out.println("Amount: " + amount);
-				node.getData().getBoard().print();
 	
-				amount = 0;
-				throw new FoundResolutionException();
-			}
+	public static void recursionAddDFS(Node<SingleMove> node, int counter, String [] order) throws FoundResolutionException{
+		amount++;
+		if(node.getData().getBoard().checkIfSolved()==true){
+			System.out.println("DFS");
+			StringBuilder steps = new StringBuilder(pathToSolutionReversed(node)).reverse();
+			System.out.println("Rozwiazanie: " + steps);
+			System.out.println("Liczba kroków: " + (steps.length()/2));
+			System.out.println("Liczba wywołań funkcji: " + amount);
+
+			amount = 0;
+			throw new FoundResolutionException();
+		}
 		try{
 			String[] orderCopy = order;
 			if(order[0] == "R"){
@@ -34,7 +33,6 @@ public class Recursion {
 			}
 			if(counter>0){
 				for(int i = 0; i < orderCopy.length; i++){
-					//System.out.println("szukam . . . głębokość: " + (20 - counter));
 					try{
 						if(node.getData().getMove() != opposite(orderCopy[i])){
 							SingleMove move = moveTo(orderCopy[i], node);
@@ -51,7 +49,6 @@ public class Recursion {
 		catch(OutOfMemoryError E){
 			System.out.println("Brakło pamięci...");
 		}
-		return;
 	}
 	
 	public static void recursionAddBFS(Node<SingleMove> node, int counter, String [] order) throws FoundResolutionException{
@@ -60,10 +57,8 @@ public class Recursion {
 			System.out.println("BFS");
 			StringBuilder steps = new StringBuilder(pathToSolutionReversed(node)).reverse();
 			System.out.println("Rozwiazanie: " + steps);
-			//System.out.println("Głębokość: " + (20 - counter));
 			System.out.println("Liczba kroków: " + (steps.length()/2));
-			System.out.println("Amount: " + amount);
-			node.getData().getBoard().print();
+			System.out.println("Liczba wywołań funkcji: " + amount);
 			amount = 0;
 			throw new FoundResolutionException();
 		}
@@ -74,7 +69,6 @@ public class Recursion {
 			}
 			if(counter>0){
 				for(int i = 0; i < orderCopy.length; i++){	// stworz wszytkie mozliwe dzieci
-					//System.out.println("szukam . . . głębokość: " + (20 - counter));
 					try{
 						if(node.getData().getMove() != opposite(orderCopy[i])){
 							SingleMove move = moveTo(orderCopy[i], node);
@@ -89,6 +83,7 @@ public class Recursion {
 				for(int j = 0; j< node.getDegree(); j++){ 	//dla kazdego dziecka
 					queueBFS.add(node.getChild(j));			//dodaj dziecko do kolejki
 					counter++;								//zwiekszamy counter o liczbe dzieci, zeby counter odpowiadal za poziom
+					//System.out.println("kolejka: " + queueBFS.size());
 				}
 				for(int j = 0; j< node.getDegree(); j++){
 					recursionAddBFS(queueBFS.poll(), --counter, orderCopy);
@@ -97,6 +92,14 @@ public class Recursion {
 		}
 		catch(OutOfMemoryError E){
 			System.out.println("Brakło pamięci...");
+		}
+	}
+	
+	public static void recursionAddIDFS(Node<SingleMove> node, int counter, String [] order) throws FoundResolutionException{
+		amount++;
+		System.out.print("I");
+		for(int j = 1; j<=counter; j++){
+			recursionAddDFS(node, j, order);
 		}
 	}
 

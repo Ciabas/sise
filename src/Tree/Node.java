@@ -95,4 +95,13 @@ public class Node<T> {
  public String toString() {
   return data.toString();
  }
+ 
+ public void clear(Node<T> root){
+	 if(root.getParent() == null){
+		 for(int i = 0; i < root.getDegree(); i++){
+			 clear(root.getChild(i));
+		 }
+	 }
+	 root=null;
+ }
 }

@@ -105,65 +105,6 @@ public final class Main {
 			return;
 		}
 		}
-
-		
-		
-//		order[0] = "2";
-//		System.out.println("HOKUSY POKUSY");
-		
-		//DFS
-//				root = new Node<SingleMove>(null, rootMove);
-//				start = System.currentTimeMillis();
-//				try{
-//					Recursion.recursionAddDFS(root, 20, order);
-//				}catch(FoundResolutionException e){
-//					stop = System.currentTimeMillis();
-//					System.out.println("znalazł :)");
-//					System.out.println("Czas wykonania:"+(stop-start));
-//					System.out.println();
-//				}
-//				root.clear(root);
-//				
-//				//IDFS
-//				root = new Node<SingleMove>(null, rootMove);
-//				start = System.currentTimeMillis();
-//				try{
-//				Recursion.recursionAddIDFS(root, 20, order);
-//				}
-//				catch(StackOverflowError e){
-//					System.out.println("Stos przepełniony");
-//				}
-//				catch(FoundResolutionException e){
-//					stop = System.currentTimeMillis();
-//					System.out.println("znalazł :)");
-//					System.out.println("Czas wykonania:"+(stop-start));
-//					System.out.println();
-//				}
-//				root.clear(root);
-//		
-//				//BFS
-//				root = new Node<SingleMove>(null, rootMove);
-//				start = System.currentTimeMillis();
-//				try{
-//				Recursion.recursionAddBFS(root, 20, order);
-//				}
-//				catch(StackOverflowError e){
-//					System.out.println("Stos przepełniony");
-//				}
-//				catch(FoundResolutionException e){
-//					stop = System.currentTimeMillis();
-//					System.out.println("znalazł :)");
-//					System.out.println("Czas wykonania:"+(stop-start));
-//					System.out.println();
-//				}
-//				root.clear(root);
-//		
-//		
-//		System.out.println();
-//		System.out.println("Początkowa układanka:");
-//		rootMove.getBoard().print();
-//		System.out.println();
-
 		
 	}
 	

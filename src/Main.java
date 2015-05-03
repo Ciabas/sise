@@ -49,7 +49,7 @@ public final class Main {
 		
 		
 		
-		order[0] = "2";
+		order[0] = "1";
 		System.out.println("HOKUSY POKUSY");
 		
 		//DFS

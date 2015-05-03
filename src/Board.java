@@ -289,4 +289,16 @@ public class Board {
 			toPrint="";
 		}
 	}
+	
+	public int checkRow(int row){
+		int number = (row * 4) + 1;
+		int counter = 0;
+		for( int i = 0 ; i < SIZE ; i++ ){
+			if(row == SIZE - 1 && i == SIZE - 1) number = 0;
+			if(state[row][i] != number){
+				counter++;
+			}
+		}
+		return counter;
+	}
 }

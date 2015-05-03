@@ -58,19 +58,37 @@ public class Order {
 	
 	private static Hashtable<Integer, String> wrongMovesRow(Node<SingleMove> node){
 		Hashtable<Integer, String> wrongMovesHash = new Hashtable<Integer, String>();
-		for(Node<SingleMove> child : node.getChildren()){
-			wrongMovesHash.put(wrongInAllRows(child),child.getData().getMove());
+		Board copyBoard=node.getData().getBoard().copy();	
+		try{
+			Board left = copyBoard.zeroToLeft();
+			wrongMovesHash.put(wrongInAllRows(left),"L");
+			}
+		catch (ImpossibleToMoveException e){}
+		try{
+			Board right = copyBoard.zeroToRight();
+			wrongMovesHash.put(wrongInAllRows(right),"R");
 		}
+		catch (ImpossibleToMoveException e){}
+		try{
+			Board up = copyBoard.zeroToUp();
+			wrongMovesHash.put(wrongInAllRows(up),"G");
+		}
+		catch (ImpossibleToMoveException e){}
+		try{
+			Board down = copyBoard.zeroToDown();	
+			wrongMovesHash.put(wrongInAllRows(down),"D");
+		}
+		catch (ImpossibleToMoveException e){}
 		return wrongMovesHash;
 	}
     
 	
-	private static int wrongInAllRows(Node<SingleMove> node){
+	private static int wrongInAllRows(Board board){
 		 int count = 0;
 
          for (int i = 0; i < Board.SIZE ; i++)
          {
-        	 count += node.getData().getBoard().checkRow(i);
+        	 count += board.checkRow(i);
          }
 
          return count;

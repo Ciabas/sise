@@ -14,10 +14,9 @@ public final class Main {
 		long start, stop; 
 		
 		//String[] order = {"L","P","G","D"};
-		String[] order = {"1"};
-		//String[] order = {"R"};
+		String[] order = {"R"};
 		Node<SingleMove> root = new Node<SingleMove>(null, rootMove);
-		
+
 		//DFS
 		root = new Node<SingleMove>(null, rootMove);
 		start = System.currentTimeMillis();
@@ -47,6 +46,41 @@ public final class Main {
 			System.out.println();
 		}
 		root.clear(root);
+		
+		
+		
+		order[0] = "2";
+		System.out.println("HOKUSY POKUSY");
+		
+		//DFS
+				root = new Node<SingleMove>(null, rootMove);
+				start = System.currentTimeMillis();
+				try{
+					Recursion.recursionAddDFS(root, 20, order);
+				}catch(FoundResolutionException e){
+					stop = System.currentTimeMillis();
+					System.out.println("znalazł :)");
+					System.out.println("Czas wykonania:"+(stop-start));
+					System.out.println();
+				}
+				root.clear(root);
+				
+				//IDFS
+				root = new Node<SingleMove>(null, rootMove);
+				start = System.currentTimeMillis();
+				try{
+				Recursion.recursionAddIDFS(root, 20, order);
+				}
+				catch(StackOverflowError e){
+					System.out.println("Stos przepełniony");
+				}
+				catch(FoundResolutionException e){
+					stop = System.currentTimeMillis();
+					System.out.println("znalazł :)");
+					System.out.println("Czas wykonania:"+(stop-start));
+					System.out.println();
+				}
+				root.clear(root);
 		
 		//BFS
 		root = new Node<SingleMove>(null, rootMove);

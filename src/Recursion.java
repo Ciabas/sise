@@ -176,4 +176,13 @@ public class Recursion {
 		}
 		return orderToReturn;
 	}
+	
+	private static String[] stepsToStringTab(StringBuilder steps){
+		String stringSteps = steps.toString();
+		String[] stringStepsTab = null;
+		for(int i = 0, j = 0; j < steps.length(); i++, j+=2){
+			stringStepsTab[i] = ""+stringSteps.charAt(j);
+		}
+		return stringStepsTab;
+	}
 }

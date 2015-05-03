@@ -17,14 +17,17 @@ public class Recursion {
 	public static void recursionAddDFS(Node<SingleMove> node, int counter, String[] order) throws FoundResolutionException{
 		amount++;
 		
-		
+		boolean step_by_step = true;
 		if(node.getData().getBoard().checkIfSolved()==true){
 			System.out.println("DFS");
 			StringBuilder steps = new StringBuilder(pathToSolutionReversed(node)).reverse();
 			System.out.println("Rozwiazanie: " + steps);
 			System.out.println("Liczba kroków: " + (steps.length()/2));
 			System.out.println("Liczba wywołań funkcji: " + amount);
-
+			if(step_by_step = true){
+			System.out.println("Krok po kroku: ");
+			SolutionPrint.solutionPrint(node.getData().getBoard(), stepsToStringTab(steps));
+			}
 			amount = 0;
 			throw new FoundResolutionException();
 		}
@@ -184,5 +187,14 @@ public class Recursion {
 			orderToReturn[randomX1]=tmp;
 		}
 		return orderToReturn;
+	}
+	
+	private static String[] stepsToStringTab(StringBuilder steps){
+		String stringSteps = steps.toString();
+		String[] stringStepsTab = null;
+		for(int i = 0, j = 0; j < steps.length(); i++, j+=2){
+			stringStepsTab[i] = ""+stringSteps.charAt(j);
+		}
+		return stringStepsTab;
 	}
 }

@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 
@@ -190,10 +192,11 @@ public class Recursion {
 	
 	private static String[] stepsToStringTab(StringBuilder steps){
 		String stringSteps = steps.toString();
-		String[] stringStepsTab = null;
-		for(int i = 0, j = 0; j < steps.length(); i++, j+=2){
-			stringStepsTab[i] = ""+stringSteps.charAt(j);
+		List<String> myList = new ArrayList<String>();
+		for(int j = 1; j < steps.length(); j+=2){
+			myList.add(""+stringSteps.charAt(j));
 		}
-		return stringStepsTab;
+		String[] arr = myList.toArray(new String[myList.size()]);
+		return arr;
 	}
 }

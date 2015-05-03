@@ -18,6 +18,7 @@ public final class Main {
 		System.out.println("-i /--idfs porządek	Strategia przeszukiwania w głąb z iteracyjnym pogłębianiem");
 		System.out.println("-a /--a id_strategii id_heurystyki	Strategia najpierw najlepszy");
 		System.out.println("-t trudność układanki - domyślnie 20");
+		System.out.println("-x wyj�cie");
 		Board rootBoard = new Board();
 		rootBoard.create();
 		rootBoard.smartShuffle(20);
@@ -25,6 +26,8 @@ public final class Main {
 		Node<SingleMove> root = new Node<SingleMove>(null, rootMove);
 		String[] order = {"R"};
 		String menu = "-b";
+		boolean contin = true;
+		while(contin = true){
 		System.out.println("Co chcesz zrobić? : ");
 	    try{
 	        BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
@@ -51,6 +54,19 @@ public final class Main {
 			case("--a"):
 			break;
 		case "-t":
+			try{
+		        BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+		        String level = bufferRead.readLine();
+		        rootBoard.smartShuffle(Integer.parseInt(level));
+		    }
+		    catch(IOException e)
+		    {
+		        e.printStackTrace();
+		    }
+		case "-x":
+			contin = false;
+			return;
+		}
 		}
 
 		

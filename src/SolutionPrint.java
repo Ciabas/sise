@@ -2,7 +2,8 @@ import Exception.ImpossibleToMoveException;
 
 
 public class SolutionPrint {
-	public void solutionPrint(Board board, String[] rightOrder){
+	public static void solutionPrint(Board board, String[] rightOrder){
+
 		Board boardCopy = board.copy();
 		for(String iter : rightOrder){
 			switch(iter){
@@ -33,4 +34,6 @@ public class SolutionPrint {
 			}
 		}
 	}
+	
+
 }

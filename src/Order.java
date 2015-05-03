@@ -13,12 +13,13 @@ public class Order {
 	
 	private Hashtable<Integer, String> conflictsInMoves(Node<SingleMove> node){
 		Hashtable<Integer, String> conflictHash = new Hashtable<Integer, String>();
-		// dla ka¿dej mo¿liwoœci ruchu trzeba dodaæ do hasha dla tego ruchu iloœæ wrongInAllRows
-		// dodaje siê tak : conflictHash.put(5, "L");
+		// dla kaï¿½dej moï¿½liwoï¿½ci ruchu trzeba dodaï¿½ do hasha dla tego ruchu iloï¿½ï¿½ wrongInAllRows
+		// dodaje siï¿½ tak : conflictHash.put(5, "L");
 		// dla jakeigos node o ruchu L:
-		// conflictHash.put(wrongInAllRows(node), "L");
-		
-		
+		// conflictHash.put(wrongInAllRows(node), "L");	
+		for(Node<SingleMove> child : node.getChildren()){
+			conflictHash.put(wrongInAllRows(child),child.getData().getMove());
+		}
 		return conflictHash;
 	}
     

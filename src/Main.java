@@ -18,7 +18,8 @@ public final class Main {
 		System.out.println("-i /--idfs porządek	Strategia przeszukiwania w głąb z iteracyjnym pogłębianiem");
 		System.out.println("-a /--a id_strategii id_heurystyki	Strategia najpierw najlepszy");
 		System.out.println("-t trudność układanki - domyślnie 20");
-		System.out.println("-x wyj�cie");
+		System.out.println("-l pokaz lamiglowke");
+		System.out.println("-x wyj�cie");
 		Board rootBoard = new Board();
 		rootBoard.create();
 		rootBoard.smartShuffle(20);
@@ -58,11 +59,16 @@ public final class Main {
 		        BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
 		        String level = bufferRead.readLine();
 		        rootBoard.smartShuffle(Integer.parseInt(level));
+		        rootBoard.print();
+		        break;
 		    }
 		    catch(IOException e)
 		    {
 		        e.printStackTrace();
 		    }
+		case "-l":
+			rootBoard.print();
+			break;
 		case "-x":
 			contin = false;
 			return;
@@ -157,7 +163,7 @@ public final class Main {
 		}
 		catch(FoundResolutionException e){
 			stop = System.currentTimeMillis();
-			System.out.println("znalazł :)");
+			System.out.println("Rozwiązanie znalezione!");
 			System.out.println("Czas wykonania:"+(stop-start));
 			System.out.println();
 		}

@@ -1,6 +1,4 @@
 import java.util.Random;
-
-import Tree.Node;
 import Exception.ImpossibleToMoveException;
 
 
@@ -29,8 +27,8 @@ public class Board {
 		super();
 	}
 	
-	public Board copy(Board toCopy){
-		
+	public Board copy(){
+		Board toCopy=this;
 		int[][] stateCopy = new int[SIZE][SIZE];
 		Point zeroCopy = new Point(toCopy.getZero().getX(), toCopy.getZero().getY());
 		for(int j = 0; j < SIZE; j++){
@@ -148,7 +146,7 @@ public class Board {
 		else throw new ImpossibleToMoveException();
 		int changingY = yZero;
 		
-		Board newBoard = copy(this);
+		Board newBoard = copy();
 		int tmp = state[yZero][xZero];
 		newBoard.state[yZero][xZero]=state[changingY][changingX];
 		newBoard.state[changingY][changingX]=tmp;
@@ -183,7 +181,7 @@ public class Board {
 		else throw new ImpossibleToMoveException();
 		int changingY = yZero;
 		
-		Board newBoard = copy(this);
+		Board newBoard = copy();
 		int tmp = state[yZero][xZero];
 		newBoard.state[yZero][xZero]=state[changingY][changingX];
 		newBoard.state[changingY][changingX]=tmp;
@@ -219,7 +217,7 @@ public class Board {
 		else throw new ImpossibleToMoveException();
 		int changingX = xZero;
 		
-		Board newBoard = copy(this);
+		Board newBoard = copy();
 		int tmp = state[yZero][xZero];
 		newBoard.state[yZero][xZero]=state[changingY][changingX];
 		newBoard.state[changingY][changingX]=tmp;
@@ -255,7 +253,7 @@ public class Board {
 		else throw new ImpossibleToMoveException();
 		int changingX = xZero;
 		
-		Board newBoard = copy(this);
+		Board newBoard = copy();
 		int tmp = state[yZero][xZero];
 		newBoard.state[yZero][xZero]=state[changingY][changingX];
 		newBoard.state[changingY][changingX]=tmp;

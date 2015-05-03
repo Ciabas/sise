@@ -1,7 +1,7 @@
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Hashtable;
 
+import Exception.ImpossibleToMoveException;
 import Tree.Node;
 
 public class Order {
@@ -19,18 +19,36 @@ public class Order {
 	
 	private static Hashtable<Integer, String> wrongMovesDistance(Node<SingleMove> node) {
 		Hashtable<Integer, String> wrongMovesHash = new Hashtable<Integer, String>();
-		for(Node<SingleMove> child : node.getChildren()){
-			wrongMovesHash.put(allDistances(child),child.getData().getMove());
+		Board copyBoard=node.getData().getBoard().copy();	
+		try{
+			Board left = copyBoard.zeroToLeft();
+			wrongMovesHash.put(allDistances(left),"L");
+			}
+		catch (ImpossibleToMoveException e){}
+		try{
+			Board right = copyBoard.zeroToRight();
+			wrongMovesHash.put(allDistances(right),"R");
 		}
+		catch (ImpossibleToMoveException e){}
+		try{
+			Board up = copyBoard.zeroToUp();
+			wrongMovesHash.put(allDistances(up),"G");
+		}
+		catch (ImpossibleToMoveException e){}
+		try{
+			Board down = copyBoard.zeroToDown();	
+			wrongMovesHash.put(allDistances(down),"D");
+		}
+		catch (ImpossibleToMoveException e){}
 		return wrongMovesHash;
 	}
 
-	private static Integer allDistances(Node<SingleMove> node) {
+	private static Integer allDistances(Board board) {
 		int count = 0;
 
         for (int i = 0; i < Board.SIZE ; i++){
         	for(int j = 0; j < Board.SIZE ; j++){
-        		count += node.getData().getBoard().calculateDistance(i, j);
+        		count += board.calculateDistance(i, j);
         	}
        	 
         }

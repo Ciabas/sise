@@ -1,4 +1,3 @@
-import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
@@ -37,6 +36,9 @@ public class Recursion {
 					break;
 				case "1":
 					orderCopy = Order.rowHeuristic(node);
+					for(String i : orderCopy){
+						System.out.println(i);
+					}
 					break;
 				case "2":
 					orderCopy = Order.distanceHeuristic(node);

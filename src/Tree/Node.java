@@ -104,4 +104,9 @@ public class Node<T> {
 	 }
 	 root=null;
  }
+ 
+ public boolean hasParrent(){
+	 if (this.getParent() == null)return false;
+	 else return true;
+ }
 }

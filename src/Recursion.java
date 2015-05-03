@@ -74,9 +74,17 @@ public class Recursion {
 		}
 		try{
 			String[] orderCopy = order;
-			if(order[0] == "R"){
+			switch(order[0]){
+			case "R": 
 				orderCopy = randomOrder();
-			}
+				break;
+			case "1":
+				orderCopy = Order.rowHeuristic(node);
+				break;
+			case "2":
+				orderCopy = Order.distanceHeuristic(node);
+				break;
+		}
 			if(counter>0){
 				for(int i = 0; i < orderCopy.length; i++){	// stworz wszytkie mozliwe dzieci
 					try{

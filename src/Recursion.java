@@ -1,3 +1,4 @@
+import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
@@ -14,8 +15,10 @@ public class Recursion {
 	private static int amount = 0;
 	
 	
-	public static void recursionAddDFS(Node<SingleMove> node, int counter, String [] order) throws FoundResolutionException{
+	public static void recursionAddDFS(Node<SingleMove> node, int counter, String[] order) throws FoundResolutionException{
 		amount++;
+		
+		
 		if(node.getData().getBoard().checkIfSolved()==true){
 			System.out.println("DFS");
 			StringBuilder steps = new StringBuilder(pathToSolutionReversed(node)).reverse();
@@ -27,9 +30,17 @@ public class Recursion {
 			throw new FoundResolutionException();
 		}
 		try{
-			String[] orderCopy = order;
-			if(order[0] == "R"){
-				orderCopy = randomOrder();
+			String [] orderCopy = order;
+			switch(order[0]){
+				case "R": 
+					orderCopy = randomOrder();
+					break;
+				case "1":
+					orderCopy = Order.rowHeuristic(node);
+					break;
+				case "2":
+					orderCopy = Order.distanceHeuristic(node);
+					break;
 			}
 			if(counter>0){
 				for(int i = 0; i < orderCopy.length; i++){

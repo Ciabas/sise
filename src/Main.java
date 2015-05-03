@@ -12,9 +12,8 @@ public final class Main {
 		
 		SingleMove rootMove = new SingleMove(rootBoard, "root");
 		long start, stop; 
-
 		
-		String[] order = {"L","P","G","D"};
+		String[] order = {"1","P","G","D"};
 		//String[] order = {"R"};
 		Node<SingleMove> root = new Node<SingleMove>(null, rootMove);
 		

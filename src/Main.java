@@ -13,9 +13,9 @@ public final class Main {
 		
 		System.out.println("Witaj w programie ze Sztucznej Inteligencji - Sławna Piętnastka!");
 		System.out.println("Menu:");
-		System.out.println("-b /--bfs porządek	Strategia przeszukiwania wszerz");
-		System.out.println("-d /--dfs porządek	Strategia przeszukiwania w głąb");
-		System.out.println("-i /--idfs porządek	Strategia przeszukiwania w głąb z iteracyjnym pogłębianiem");
+		System.out.println("-b /--bfs porządek	Strategia przeszukiwania wszerz (id: 1)");
+		System.out.println("-d /--dfs porządek	Strategia przeszukiwania w głąb (id: 2)");
+		System.out.println("-i /--idfs porządek	Strategia przeszukiwania w głąb z iteracyjnym pogłębianiem (id: 3)");
 		System.out.println("-a /--a id_strategii id_heurystyki	Strategia najpierw najlepszy");
 		System.out.println("-t trudność układanki - domyślnie 20");
 		System.out.println("-l pokaz lamiglowke");
@@ -29,6 +29,7 @@ public final class Main {
 		String menu = "-b";
 		boolean contin = true;
 		while(contin = true){
+		order[0] = "R";
 		System.out.println("Co chcesz zrobić? : ");
 	    try{
 	        BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
@@ -38,7 +39,19 @@ public final class Main {
 	    {
 	        e.printStackTrace();
 	    }
-		switch(menu){
+	    String[] parts = menu.split(" ");
+
+	    if(parts.length > 1){
+
+	    	if(parts[1] == "R"){
+	    		order[0] = "R";
+	    	}
+	    	else if(parts[0] != "-a" && parts[0] != "--a"){
+	    		order = parts[1].split(",");
+	    	}
+	    	
+	    }
+		switch(parts[0]){
 		case("-b"):
 			case("--bfs"):
 				BFS(root, 0, order,  rootMove);			
@@ -53,23 +66,41 @@ public final class Main {
 			break;
 		case("-a"):
 			case("--a"):
+				if(parts.length == 3){
+					int strategy_id = (Integer.parseInt(parts[1]));
+					order[0] = parts[2];
+					switch(order[0]){
+					case "1":
+						System.out.println("Heurystyka poprawności rzędów");
+						break;
+					case "2":
+						System.out.println("Heurystyka odległości od rozwiązania");
+						break;
+					}
+					switch(strategy_id){
+					case 1:
+						BFS(root, 0, order,  rootMove);
+						break;
+					case 2:
+						DFS(root, 0, order,  rootMove);
+						break;
+					case 3:
+						IDFS(root, 0, order,  rootMove);
+						break;
+					}
+				}
 			break;
 		case "-t":
-			try{
-		        BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
-		        String level = bufferRead.readLine();
-		        rootBoard.smartShuffle(Integer.parseInt(level));
-		        rootBoard.print();
-		        break;
-		    }
-		    catch(IOException e)
-		    {
-		        e.printStackTrace();
-		    }
+			rootBoard.create();
+			rootBoard.smartShuffle(Integer.parseInt(parts[1]));
+		    rootBoard.print();
+		    break;
+
 		case "-l":
 			rootBoard.print();
 			break;
 		case "-x":
+			System.out.println("Do widzenia!");
 			contin = false;
 			return;
 		}
@@ -144,7 +175,6 @@ public final class Main {
 			Recursion.recursionAddDFS(root, 20, order);
 		}catch(FoundResolutionException e){
 			stop = System.currentTimeMillis();
-			System.out.println("Rozwiązanie znalezione!");
 			System.out.println("Czas wykonania:"+(stop-start));
 			System.out.println();
 		}
@@ -163,7 +193,6 @@ public final class Main {
 		}
 		catch(FoundResolutionException e){
 			stop = System.currentTimeMillis();
-			System.out.println("Rozwiązanie znalezione!");
 			System.out.println("Czas wykonania:"+(stop-start));
 			System.out.println();
 		}
@@ -182,7 +211,6 @@ public final class Main {
 		}
 		catch(FoundResolutionException e){
 			stop = System.currentTimeMillis();
-			System.out.println("Rozwiązanie znalezione!");
 			System.out.println("Czas wykonania:"+(stop-start));
 			System.out.println();
 		}

@@ -35,7 +35,6 @@ public class Recursion {
 			String [] orderCopy = order;
 			switch(order[0]){
 				case "R": 
-					System.out.println("yo");
 					orderCopy = randomOrder();
 					break;
 				case "1":

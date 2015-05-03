@@ -1,5 +1,6 @@
 import java.util.Random;
 
+import Tree.Node;
 import Exception.ImpossibleToMoveException;
 
 
@@ -301,4 +302,18 @@ public class Board {
 		}
 		return counter;
 	}
+	
+	public int calculateDistance(int i, int j){
+		int value = state[i][j];
+		int row = (Integer)(value / 4);
+		int column = 5 - row * 4;
+		if(value == 0){
+			row = SIZE - 1;
+			column = SIZE - 1;
+		}
+		int distance = Math.abs(i - row) + Math.abs(column - j);
+
+		return distance;
+	}
+
 }

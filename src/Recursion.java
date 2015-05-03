@@ -16,17 +16,16 @@ public class Recursion {
 	private static int amount = 0;
 	
 	
-	public static void recursionAddDFS(Node<SingleMove> node, int counter, String[] order) throws FoundResolutionException{
+	public static void recursionAddDFS(Node<SingleMove> node, int counter, String[] order, boolean step_by_step) throws FoundResolutionException{
 		amount++;
 		
-		boolean step_by_step = true;
 		if(node.getData().getBoard().checkIfSolved()==true){
 			System.out.println("DFS");
 			StringBuilder steps = new StringBuilder(pathToSolutionReversed(node)).reverse();
 			System.out.println("Rozwiazanie: " + steps);
 			System.out.println("Liczba kroków: " + (steps.length()/2));
 			System.out.println("Liczba wywołań funkcji: " + amount);
-			if(step_by_step = true){
+			if(step_by_step == true){
 			System.out.println("Krok po kroku: ");
 			SolutionPrint.solutionPrint(node.getData().getBoard(), stepsToStringTab(steps));
 			}
@@ -54,7 +53,7 @@ public class Recursion {
 							Node<SingleMove> moveNode = new Node<SingleMove>();
 							moveNode.setData(move);
 							node.addChild(moveNode);
-							recursionAddDFS(moveNode, --counter, order);
+							recursionAddDFS(moveNode, --counter, order, step_by_step);
 						}
 					}
 					catch (ImpossibleToMoveException e) {}
@@ -66,7 +65,7 @@ public class Recursion {
 		}
 	}
 	
-	public static void recursionAddBFS(Node<SingleMove> node, int counter, String [] order) throws FoundResolutionException{
+	public static void recursionAddBFS(Node<SingleMove> node, int counter, String [] order, boolean step_by_step) throws FoundResolutionException{
 		amount++;
 		if(node.getData().getBoard().checkIfSolved()==true){
 			System.out.println("BFS");
@@ -74,6 +73,10 @@ public class Recursion {
 			System.out.println("Rozwiazanie: " + steps);
 			System.out.println("Liczba kroków: " + (steps.length()/2));
 			System.out.println("Liczba wywołań funkcji: " + amount);
+			if(step_by_step == true){
+				System.out.println("Krok po kroku: ");
+				SolutionPrint.solutionPrint(node.getData().getBoard(), stepsToStringTab(steps));
+				}
 			amount = 0;
 			throw new FoundResolutionException();
 		}
@@ -109,7 +112,7 @@ public class Recursion {
 					//System.out.println("kolejka: " + queueBFS.size());
 				}
 				for(int j = 0; j< node.getDegree(); j++){
-					recursionAddBFS(queueBFS.poll(), --counter, orderCopy);
+					recursionAddBFS(queueBFS.poll(), --counter, orderCopy, step_by_step);
 				}	
 			}
 		}
@@ -118,11 +121,11 @@ public class Recursion {
 		}
 	}
 	
-	public static void recursionAddIDFS(Node<SingleMove> node, int counter, String [] order) throws FoundResolutionException{
+	public static void recursionAddIDFS(Node<SingleMove> node, int counter, String [] order, boolean step_by_step) throws FoundResolutionException{
 		amount++;
 		System.out.print("I");
 		for(int j = 1; j<=counter; j++){
-			recursionAddDFS(node, j, order);
+			recursionAddDFS(node, j, order, step_by_step);
 		}
 	}
 

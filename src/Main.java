@@ -19,6 +19,7 @@ public final class Main {
 		System.out.println("-a /--a id_strategii id_heurystyki	Strategia najpierw najlepszy");
 		System.out.println("-t trudność układanki - domyślnie 20");
 		System.out.println("-l pokaz lamiglowke");
+		System.out.println("-p wlacz/wylacz pokazywanie rozwiązania krok po kroku");
 		System.out.println("-x wyj�cie");
 		Board rootBoard = new Board();
 		rootBoard.create();
@@ -27,6 +28,7 @@ public final class Main {
 		Node<SingleMove> root = new Node<SingleMove>(null, rootMove);
 		String[] order = {"R"};
 		String menu = "-b";
+		boolean step_by_step = false;
 		boolean contin = true;
 		while(contin = true){
 		order[0] = "R";
@@ -54,15 +56,15 @@ public final class Main {
 		switch(parts[0]){
 		case("-b"):
 			case("--bfs"):
-				BFS(root, 0, order,  rootMove);			
+				BFS(root, 0, order,  rootMove, step_by_step);			
 				break;
 		case("-d"):
 			case("--dfs"):
-				DFS(root, 0, order,  rootMove);	
+				DFS(root, 0, order,  rootMove, step_by_step);	
 			break;
 		case("-i"):
 			case("--idfs"):
-				IDFS(root, 0, order,  rootMove);
+				IDFS(root, 0, order,  rootMove, step_by_step);
 			break;
 		case("-a"):
 			case("--a"):
@@ -79,13 +81,13 @@ public final class Main {
 					}
 					switch(strategy_id){
 					case 1:
-						BFS(root, 0, order,  rootMove);
+						BFS(root, 0, order,  rootMove, step_by_step);
 						break;
 					case 2:
-						DFS(root, 0, order,  rootMove);
+						DFS(root, 0, order,  rootMove, step_by_step);
 						break;
 					case 3:
-						IDFS(root, 0, order,  rootMove);
+						IDFS(root, 0, order,  rootMove, step_by_step);
 						break;
 					}
 				}
@@ -99,6 +101,10 @@ public final class Main {
 		case "-l":
 			rootBoard.print();
 			break;
+		case "-p":
+			step_by_step = !step_by_step;
+			System.out.println(step_by_step);
+			break;
 		case "-x":
 			System.out.println("Do widzenia!");
 			contin = false;
@@ -108,12 +114,12 @@ public final class Main {
 		
 	}
 	
-	private static void DFS(Node<SingleMove> root, int counter, String[] order, SingleMove rootMove){
+	private static void DFS(Node<SingleMove> root, int counter, String[] order, SingleMove rootMove, boolean step_by_step){
 		long stop, start;
 		root = new Node<SingleMove>(null, rootMove);
 		start = System.currentTimeMillis();
 		try{
-			Recursion.recursionAddDFS(root, 20, order);
+			Recursion.recursionAddDFS(root, 20, order, step_by_step);
 		}catch(FoundResolutionException e){
 			stop = System.currentTimeMillis();
 			System.out.println("Czas wykonania:"+(stop-start));
@@ -122,12 +128,12 @@ public final class Main {
 		root.clear(root);
 	}
 	
-	private static void BFS(Node<SingleMove> root, int counter, String[] order, SingleMove rootMove){
+	private static void BFS(Node<SingleMove> root, int counter, String[] order, SingleMove rootMove, boolean step_by_step){
 		long stop, start;
 		root = new Node<SingleMove>(null, rootMove);
 		start = System.currentTimeMillis();
 		try{
-		Recursion.recursionAddBFS(root, 20, order);
+		Recursion.recursionAddBFS(root, 20, order, step_by_step);
 		}
 		catch(StackOverflowError e){
 			System.out.println("Stos przepełniony");
@@ -140,12 +146,12 @@ public final class Main {
 		root.clear(root);
 	}
 	
-	private static void IDFS(Node<SingleMove> root, int counter, String[] order, SingleMove rootMove){
+	private static void IDFS(Node<SingleMove> root, int counter, String[] order, SingleMove rootMove, boolean step_by_step){
 		long stop, start;
 		root = new Node<SingleMove>(null, rootMove);
 		start = System.currentTimeMillis();
 		try{
-		Recursion.recursionAddIDFS(root, 20, order);
+		Recursion.recursionAddIDFS(root, 20, order, step_by_step);
 		}
 		catch(StackOverflowError e){
 			System.out.println("Stos przepełniony");

@@ -115,10 +115,10 @@ public final class Main {
 					order[0] = parts[2];
 					switch(order[0]){
 					case "1":
-						System.out.println("Heurystyka poprawności rzędów");
+						System.out.println("Heurystyka rzędów");
 						break;
 					case "2":
-						System.out.println("Heurystyka odległości od rozwiązania");
+						System.out.println("Heurystyka odległości (Manhatann)");
 						break;
 					}
 					switch(strategy_id){

@@ -53,7 +53,7 @@ public final class Main {
 		}
 		else{
 			rootBoard.create();
-			rootBoard.smartShuffle(20);
+			rootBoard.smartShuffle(6);
 		}
 		
 		System.out.println("Menu:");
@@ -61,7 +61,7 @@ public final class Main {
 		System.out.println("-d /--dfs porządek	Strategia przeszukiwania w głąb (id: 2)");
 		System.out.println("-i /--idfs porządek	Strategia przeszukiwania w głąb z iteracyjnym pogłębianiem (id: 3)");
 		System.out.println("-a /--a id_strategii id_heurystyki	Strategia najpierw najlepszy");
-		System.out.println("-t trudność układanki - domyślnie 20");
+		System.out.println("-t trudność układanki - domyślnie 6");
 		System.out.println("-l pokaz lamiglowke");
 		System.out.println("-p wlacz/wylacz pokazywanie rozwiązania krok po kroku");
 		System.out.println("-x wyj�cie");
@@ -115,10 +115,10 @@ public final class Main {
 					order[0] = parts[2];
 					switch(order[0]){
 					case "1":
-						System.out.println("Heurystyka poprawności rzędów");
+						System.out.println("Heurystyka rzędów");
 						break;
 					case "2":
-						System.out.println("Heurystyka odległości od rozwiązania");
+						System.out.println("Heurystyka odległości (Manhatann)");
 						break;
 					}
 					switch(strategy_id){
@@ -136,7 +136,12 @@ public final class Main {
 			break;
 		case "-t":
 			rootBoard.create();
-			rootBoard.smartShuffle(Integer.parseInt(parts[1]));
+			try{
+				rootBoard.smartShuffle(Integer.parseInt(parts[1]));
+			}
+			catch(ArrayIndexOutOfBoundsException e){
+				rootBoard.smartShuffle(6);
+			}
 		    rootBoard.print();
 		    break;
 

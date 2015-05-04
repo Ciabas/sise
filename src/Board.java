@@ -76,31 +76,52 @@ public class Board {
 	
 	public void smartShuffle(int steps){
 		char[] move = {'P','L','G','D'};
+		char lastMove = 'R';
 		Random random_side;
 		for(int i = 0 ; i < steps ; i++){
 			random_side = new Random();
 			char direction = move[random_side.nextInt(3)];
 			switch(direction){
 			case('P'):
+				if(lastMove == 'L'){
+					i--;
+					break;
+				}
 				try {
+					lastMove = 'P';
 					shuffleZeroToRight();
 					break;
 				} catch (ImpossibleToMoveException e) {
 				}
 			case('L'):
+				if(lastMove == 'R'){
+					i--;
+					break;
+				}
 				try {
+					lastMove = 'L';
 					shuffleZeroToLeft();
 					break;
 				} catch (ImpossibleToMoveException e) {
 				}
 			case('G'):
+				if(lastMove == 'D'){
+					i--;
+					break;
+				}
 				try {
+					lastMove = 'G';
 					shuffleZeroToUp();
 					break;
 				} catch (ImpossibleToMoveException e) {
 				}
 			case('D'):
+				if(lastMove == 'G'){
+					i--;
+					break;
+				}
 				try {
+					lastMove = 'D';
 					shuffleZeroToDown();
 					break;
 				} catch (ImpossibleToMoveException e) {

@@ -14,11 +14,14 @@ public class Recursion {
 	
 	private static Queue<Node<SingleMove>> queueBFS = new LinkedList<Node<SingleMove>>();
 	private static int amount = 0;
+	public static Node<SingleMove> root;
 	
 	
 	public static void recursionAddDFS(Node<SingleMove> node, int counter, String[] order, boolean step_by_step) throws FoundResolutionException{
 		amount++;
-		
+		if(amount==1){
+			root = node;
+		}
 		if(node.getData().getBoard().checkIfSolved()==true){
 			System.out.println("DFS");
 			StringBuilder steps = new StringBuilder(pathToSolutionReversed(node)).reverse();
@@ -27,7 +30,7 @@ public class Recursion {
 			if(step_by_step == true){
 				System.out.println("Liczba wywołań funkcji: " + amount);
 				System.out.println("Krok po kroku: ");
-				SolutionPrint.solutionPrint(node.getData().getBoard(), stepsToStringTab(steps));
+				SolutionPrint.solutionPrint(root.getData().getBoard(), stepsToStringTab(steps));
 			}
 			amount = 0;
 			throw new FoundResolutionException();
@@ -67,6 +70,9 @@ public class Recursion {
 	
 	public static void recursionAddBFS(Node<SingleMove> node, int counter, String [] order, boolean step_by_step) throws FoundResolutionException{
 		amount++;
+		if(amount==1){
+			root = node;
+		}
 		if(node.getData().getBoard().checkIfSolved()==true){
 			System.out.println("BFS");
 			StringBuilder steps = new StringBuilder(pathToSolutionReversed(node)).reverse();
@@ -75,7 +81,7 @@ public class Recursion {
 			if(step_by_step == true){
 				System.out.println("Liczba wywołań funkcji: " + amount);
 				System.out.println("Krok po kroku: ");
-				SolutionPrint.solutionPrint(node.getData().getBoard(), stepsToStringTab(steps));
+				SolutionPrint.solutionPrint(root.getData().getBoard(), stepsToStringTab(steps));
 				}
 			amount = 0;
 			throw new FoundResolutionException();

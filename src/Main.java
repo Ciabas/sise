@@ -10,8 +10,52 @@ import Tree.*;
 public final class Main {
 
 	public static void main(String[] args) {
-		
 		System.out.println("Witaj w programie ze Sztucznej Inteligencji - SÅ‚awna PiÄ™tnastka!");
+		int size;
+		String input = "4";
+		String[] rows = {"1","2","3","4"};
+		Board rootBoard = new Board();
+		try{
+			System.out.println("Podaj wielkoœæ ³amig³ówki");
+	        BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+	        input = bufferRead.readLine();
+	    }
+	    catch(IOException e)
+	    {
+	        e.printStackTrace();
+	    }
+		size = Integer.parseInt(input);
+		Board.SIZE = size;
+		System.out.println("[t/n] Czy chcesz wype³niæ tablicê ³amig³ówki? jeœli nie - wylosujemy j¹ sami!");
+		try{
+	        BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+	        input = bufferRead.readLine();
+	    }
+	    catch(IOException e)
+	    {
+	        e.printStackTrace();
+	    }
+		int[][] state = new int[size][size];
+		System.out.println(input);
+		if(input.equals("t")){
+			try{
+				for(int i = 0 ; i < size ; i++){
+					System.out.println("Podaj wiersz "+ (i+1));
+					BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+					input = bufferRead.readLine();
+					rows = input.split(",");
+					state = createCustomPuzzle(size, i, rows, state);
+				}
+		    }catch(IOException e)
+		    {
+		        e.printStackTrace();
+		    }
+			rootBoard.custom(state);
+		}
+		else{
+			rootBoard.create();
+			rootBoard.smartShuffle(20);
+		}
 		System.out.println("Menu:");
 		System.out.println("-b /--bfs porzÄ…dek	Strategia przeszukiwania wszerz (id: 1)");
 		System.out.println("-d /--dfs porzÄ…dek	Strategia przeszukiwania w gÅ‚Ä…b (id: 2)");
@@ -21,9 +65,7 @@ public final class Main {
 		System.out.println("-l pokaz lamiglowke");
 		System.out.println("-p wlacz/wylacz pokazywanie rozwiÄ…zania krok po kroku");
 		System.out.println("-x wyjï¿½cie");
-		Board rootBoard = new Board();
-		rootBoard.create();
-		rootBoard.smartShuffle(20);
+		
 		SingleMove rootMove = new SingleMove(rootBoard, "root");
 		Node<SingleMove> root = new Node<SingleMove>(null, rootMove);
 		String[] order = {"R"};
@@ -162,5 +204,12 @@ public final class Main {
 			System.out.println();
 		}
 		root.clear(root);	
+	}
+	
+	private static int[][] createCustomPuzzle(int size, int row, String[] input, int[][] state){
+		for(int i = 0 ; i < size ; i ++){
+			state[row][i] = Integer.parseInt(input[i]);
+		}
+		return state;
 	}
 }

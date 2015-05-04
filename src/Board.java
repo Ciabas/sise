@@ -3,7 +3,7 @@ import Exception.ImpossibleToMoveException;
 
 
 public class Board {
-	public final static int SIZE = 4;
+	public static int SIZE = 4;
 	private int[][] state = new int[SIZE][SIZE];
 	private Point zero = new Point();
 	
@@ -313,5 +313,13 @@ public class Board {
 
 		return distance;
 	}
-
+	
+	public void custom(int[][] array)
+	{
+		for(int i = 0; i < SIZE; i++){
+			for(int j = 0; j < SIZE; j++){
+				state[i][j] = array[i][j];
+			}
+		}
+	}
 }

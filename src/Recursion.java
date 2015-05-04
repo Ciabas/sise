@@ -24,10 +24,10 @@ public class Recursion {
 			StringBuilder steps = new StringBuilder(pathToSolutionReversed(node)).reverse();
 			System.out.println("Rozwiazanie: " + steps);
 			System.out.println("Liczba kroków: " + (steps.length()/2));
-			System.out.println("Liczba wywołań funkcji: " + amount);
 			if(step_by_step == true){
-			System.out.println("Krok po kroku: ");
-			SolutionPrint.solutionPrint(node.getData().getBoard(), stepsToStringTab(steps));
+				System.out.println("Liczba wywołań funkcji: " + amount);
+				System.out.println("Krok po kroku: ");
+				SolutionPrint.solutionPrint(node.getData().getBoard(), stepsToStringTab(steps));
 			}
 			amount = 0;
 			throw new FoundResolutionException();

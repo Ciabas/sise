@@ -83,7 +83,7 @@ public class Board {
 			char direction = move[random_side.nextInt(3)];
 			switch(direction){
 			case('P'):
-				if(lastMove == 'P'){
+				if(lastMove == 'L'){
 					i--;
 					break;
 				}
@@ -94,7 +94,7 @@ public class Board {
 				} catch (ImpossibleToMoveException e) {
 				}
 			case('L'):
-				if(lastMove == 'L'){
+				if(lastMove == 'R'){
 					i--;
 					break;
 				}
@@ -105,7 +105,7 @@ public class Board {
 				} catch (ImpossibleToMoveException e) {
 				}
 			case('G'):
-				if(lastMove == 'G'){
+				if(lastMove == 'D'){
 					i--;
 					break;
 				}
@@ -116,7 +116,7 @@ public class Board {
 				} catch (ImpossibleToMoveException e) {
 				}
 			case('D'):
-				if(lastMove == 'D'){
+				if(lastMove == 'G'){
 					i--;
 					break;
 				}

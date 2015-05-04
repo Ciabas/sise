@@ -303,15 +303,32 @@ public class Board {
 	
 	public int calculateDistance(int i, int j){
 		int value = state[i][j];
-		int row = (Integer)(value / 4);
-		int column = 5 - row * 4;
+		int row,column;
 		if(value == 0){
-			row = SIZE - 1;
-			column = SIZE - 1;
+			int[] position = findValue(value);
+			row = position[0];
+			column = position[1];
+		}else{
+			row = SIZE-1;
+			column = SIZE-1;
 		}
 		int distance = Math.abs(i - row) + Math.abs(column - j);
-
 		return distance;
+	}
+	
+	private int[] findValue(int find){
+		int[] result = {0,0}; 
+		for(int y = 0 ; y < SIZE ; y++ ){
+			for(int x = 0 ; x < SIZE ; x++){
+				if(x+1+(SIZE*y) == find){
+					result[0] = y;
+					result[1] = x;
+					return result;
+				}
+				
+			}
+		}
+		return result;
 	}
 	
 	public void custom(int[][] array)

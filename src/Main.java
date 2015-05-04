@@ -16,7 +16,7 @@ public final class Main {
 		String[] rows = {"1","2","3","4"};
 		Board rootBoard = new Board();
 		try{
-			System.out.println("Podaj wielkoœæ ³amig³ówki");
+			System.out.println("Podaj wielkoï¿½ï¿½ ï¿½amigï¿½ï¿½wki");
 	        BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
 	        input = bufferRead.readLine();
 	    }
@@ -26,7 +26,7 @@ public final class Main {
 	    }
 		size = Integer.parseInt(input);
 		Board.SIZE = size;
-		System.out.println("[t/n] Czy chcesz wype³niæ tablicê ³amig³ówki? jeœli nie - wylosujemy j¹ sami!");
+		System.out.println("[t/n] Czy chcesz wypeï¿½niï¿½ tablicï¿½ ï¿½amigï¿½ï¿½wki? jeï¿½li nie - wylosujemy jï¿½ sami!");
 		try{
 	        BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
 	        input = bufferRead.readLine();
@@ -36,7 +36,6 @@ public final class Main {
 	        e.printStackTrace();
 	    }
 		int[][] state = new int[size][size];
-		System.out.println(input);
 		if(input.equals("t")){
 			try{
 				for(int i = 0 ; i < size ; i++){
@@ -56,6 +55,7 @@ public final class Main {
 			rootBoard.create();
 			rootBoard.smartShuffle(20);
 		}
+		
 		System.out.println("Menu:");
 		System.out.println("-b /--bfs porzÄ…dek	Strategia przeszukiwania wszerz (id: 1)");
 		System.out.println("-d /--dfs porzÄ…dek	Strategia przeszukiwania w gÅ‚Ä…b (id: 2)");

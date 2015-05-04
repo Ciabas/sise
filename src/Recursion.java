@@ -29,6 +29,7 @@ public class Recursion {
 			System.out.println("Liczba kroków: " + (steps.length()/2));
 			if(step_by_step == true){
 				System.out.println("Liczba wywołań funkcji: " + amount);
+				System.out.println("Glebokosc: " + calculateDepth(node));
 				System.out.println("Krok po kroku: ");
 				SolutionPrint.solutionPrint(root.getData().getBoard(), stepsToStringTab(steps));
 			}
@@ -80,6 +81,7 @@ public class Recursion {
 			System.out.println("Liczba kroków: " + (steps.length()/2));
 			if(step_by_step == true){
 				System.out.println("Liczba wywołań funkcji: " + amount);
+				System.out.println("Glebokosc: " + calculateDepth(node));
 				System.out.println("Krok po kroku: ");
 				SolutionPrint.solutionPrint(root.getData().getBoard(), stepsToStringTab(steps));
 				}
@@ -207,5 +209,14 @@ public class Recursion {
 		}
 		String[] arr = myList.toArray(new String[myList.size()]);
 		return arr;
+	}
+	
+	private static int calculateDepth( Node<SingleMove> node){
+		if(node.hasParrent()==false){
+			return +1 ;
+		}
+		else{
+			return 1 + calculateDepth(node.getParent());
+		}
 	}
 }

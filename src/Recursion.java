@@ -213,7 +213,7 @@ public class Recursion {
 	
 	private static int calculateDepth( Node<SingleMove> node){
 		if(node.hasParrent()==false){
-			return +1 ;
+			return + 0 ;
 		}
 		else{
 			return 1 + calculateDepth(node.getParent());

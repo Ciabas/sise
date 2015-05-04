@@ -23,15 +23,15 @@ public class Recursion {
 			root = node;
 		}
 		if(node.getData().getBoard().checkIfSolved()==true){
-			System.out.println("DFS");
+			//System.out.println("DFS");
 			StringBuilder steps = new StringBuilder(pathToSolutionReversed(node)).reverse();
-			System.out.println("Rozwiazanie: " + steps);
-			System.out.println("Liczba kroków: " + (steps.length()/2));
+			//System.out.print("Rozwiazanie: " + steps+" ");
+			//System.out.print("Liczba kroków: " + (steps.length()/2)+" ");
 			if(step_by_step == true){
-				System.out.println("Liczba wywołań funkcji: " + amount);
-				System.out.println("Glebokosc: " + calculateDepth(node));
-				System.out.println("Krok po kroku: ");
-				SolutionPrint.solutionPrint(root.getData().getBoard(), stepsToStringTab(steps));
+				System.out.print("Liczba wywołań funkcji: " + amount+" ");
+				System.out.print("Glebokosc: " + calculateDepth(node)+" ");
+				//System.out.println("Krok po kroku: ");
+				//SolutionPrint.solutionPrint(root.getData().getBoard(), stepsToStringTab(steps));
 			}
 			amount = 0;
 			throw new FoundResolutionException();
@@ -75,15 +75,16 @@ public class Recursion {
 			root = node;
 		}
 		if(node.getData().getBoard().checkIfSolved()==true){
-			System.out.println("BFS");
+			//System.out.println("BFS");
 			StringBuilder steps = new StringBuilder(pathToSolutionReversed(node)).reverse();
 			System.out.println("Rozwiazanie: " + steps);
 			System.out.println("Liczba kroków: " + (steps.length()/2));
 			if(step_by_step == true){
-				System.out.println("Liczba wywołań funkcji: " + amount);
-				System.out.println("Glebokosc: " + calculateDepth(node));
-				System.out.println("Krok po kroku: ");
-				SolutionPrint.solutionPrint(root.getData().getBoard(), stepsToStringTab(steps));
+				System.out.print("Liczba wywołań funkcji: " + amount+" ");
+				System.out.print("Glebokosc: " + calculateDepth(node)+" ");
+				System.out.print("Rozmiar kolejki:"+queueBFS.size()+" ");
+				//System.out.println("Krok po kroku: ");
+				//SolutionPrint.solutionPrint(root.getData().getBoard(), stepsToStringTab(steps));
 				}
 			amount = 0;
 			throw new FoundResolutionException();

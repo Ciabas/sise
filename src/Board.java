@@ -311,12 +311,14 @@ public class Board {
 	}
 	
 	public int checkRow(int row){
-		int number = (row * 4) + 1;
 		int counter = 0;
-		for( int i = 0 ; i < SIZE ; i++ ){
-			if(row == SIZE - 1 && i == SIZE - 1) number = 0;
-			if(state[row][i] != number){
-				counter++;
+		for( int i = 0 ; i < SIZE-1 ; i++ ){
+			for( int j = i + 1 ; j < SIZE ; j++ ){
+				int first = state[row][i];
+                int second = state[row][j];
+                if(first > second && findValue(first)[0] == row && findValue(second)[0] == row){
+                	counter++;
+                }
 			}
 		}
 		return counter;

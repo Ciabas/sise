@@ -14,9 +14,9 @@ public final class Main {
 		int size;
 		String input = "4";
 		String[] rows = {"1","2","3","4"};
-		Board rootBoard = new Board();
+		
 		try{
-			System.out.println("Podaj wielko�� �amig��wki");
+			System.out.println("Podaj wielkość łamigłówki");
 	        BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
 	        input = bufferRead.readLine();
 	    }
@@ -26,7 +26,8 @@ public final class Main {
 	    }
 		size = Integer.parseInt(input);
 		Board.SIZE = size;
-		System.out.println("[t/n] Czy chcesz wype�ni� tablic� �amig��wki? je�li nie - wylosujemy j� sami!");
+		Board rootBoard = new Board();
+		System.out.println("[t/n] Czy chcesz wypełnić tablicę łamigłówki? jeśli nie - wylosujemy ją sami!");
 		try{
 	        BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
 	        input = bufferRead.readLine();
@@ -50,6 +51,7 @@ public final class Main {
 		        e.printStackTrace();
 		    }
 			rootBoard.custom(state);
+			System.out.println(rootBoard.checkRow(0));
 		}
 		else{
 			rootBoard.create();
@@ -64,7 +66,7 @@ public final class Main {
 		System.out.println("-t trudność układanki - domyślnie 6");
 		System.out.println("-l pokaz lamiglowke");
 		System.out.println("-p wlacz/wylacz pokazywanie rozwiązania krok po kroku");
-		System.out.println("-x wyj�cie");
+		System.out.println("-x wyjście");
 		
 		SingleMove rootMove = new SingleMove(rootBoard, "root");
 		Node<SingleMove> root = new Node<SingleMove>(null, rootMove);

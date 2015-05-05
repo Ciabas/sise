@@ -51,7 +51,6 @@ public final class Main {
 		        e.printStackTrace();
 		    }
 			rootBoard.custom(state);
-			System.out.println(rootBoard.checkRow(0));
 		}
 		else{
 			rootBoard.create();

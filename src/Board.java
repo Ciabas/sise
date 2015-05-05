@@ -328,12 +328,12 @@ public class Board {
 		int value = state[i][j];
 		int row,column;
 		if(value == 0){
+			row = SIZE-1;
+			column = SIZE-1;
+		}else{
 			int[] position = findValue(value);
 			row = position[0];
 			column = position[1];
-		}else{
-			row = SIZE-1;
-			column = SIZE-1;
 		}
 		int distance = Math.abs(i - row) + Math.abs(column - j);
 		return distance;
